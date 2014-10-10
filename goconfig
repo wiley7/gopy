@@ -1,0 +1,16 @@
+[
+    {
+        "tag": "ssh_use_passwd",
+        "host": "user@example.com",
+        "passwd": "123456"
+    },
+    {
+        "tag": "ssh_use_rsa",
+        "host": "user@example.com",
+        "rsa": "/home/user/.ssh/id_rsa_2"
+    },
+    {
+        "tag": "direct_connect",
+        "host": "user@example.com"
+    },
+]
