@@ -17,7 +17,7 @@ def call(data):
     command = 'ssh ' + data['host']
     print command
     if 'passwd' in data:
-        command = "sshpass -p " + data['passwd'] + " " + command
+        command = "sshpass -p \"" + data['passwd'] + "\" " + command
     if 'rsa' in data:
         command = command + " -i " + data['rsa']
     if 'cmd' in data:
@@ -50,15 +50,22 @@ try:
     fileObject = open(CONFIG_FILE)
     all_content_text = fileObject.read()
 except:
-    print "[error] config file '%s' not exists" % CONFIG_FILE
+    print "%s not exists" % CONFIG_FILE
     exit()
-fileObject.close()
+finally:
+    fileObject.close()
 CONFIG = json.loads(all_content_text)
-if len(sys.argv) <= 1 :
+
+def start():
     printInfo()
     tag = raw_input("Enter to go: ")
     if tag == 'q' or tag == 'exit':
         exit()
+    elif tag == '':
+        start()
     goTag(tag)
+
+if len(sys.argv) <= 1 :
+    start()
 else:
     goTag(sys.argv[1])
